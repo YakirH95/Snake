@@ -9,18 +9,19 @@ public class Snake : MonoBehaviour
     float gridMoveTimer;
     float gridMoveTimerMax;
 
-    private void Awake()
+    private void Start()
     {
         gridPosition = new Vector2Int(0, 0);
         gridMoveTimerMax = 0.7f;
         gridMoveTimer = gridMoveTimerMax;
-        gridMoveDirection = new Vector2Int(1, 0);
+        gridMoveDirection = new Vector2Int(0, 0);
+
+        InvokeRepeating("HandleMovementPeriods", 0, 1);
     }
 
     private void Update()
     {
         HandleInput();
-        HandleGridMovement();
     }
 
     void HandleInput()
@@ -55,38 +56,19 @@ public class Snake : MonoBehaviour
             gridMoveDirection.x = -1;
             gridMoveDirection.y = 0;
         }
-
     }
 
-    void HandleGridMovement()
+    void HandleMovementPeriods()
     {
-        gridMoveTimer += Time.deltaTime;
+        gridPosition += gridMoveDirection;
+        transform.position = new Vector2(gridPosition.x, gridPosition.y);
+    }
 
-        if (gridMoveTimer >= gridMoveTimerMax)
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Apple")
         {
-            gridPosition += gridMoveDirection;
-            gridMoveTimer -= gridMoveTimerMax;
 
-            transform.position = new Vector2(gridPosition.x, gridPosition.y);
         }
     }
-
-
-    /* public Snake next;
-
-     public void SetNext(Snake IN)
-     {
-         next = IN;
-     }
-
-     public Snake GetNext()
-     {
-         return next;
-     }
-
-     public void RemoveTrail()
-     {
-         Destroy(this.gameObject);
-     }*/
-
 }

@@ -64,6 +64,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Apple.cs" />
+    <Compile Include="Assets\Scripts\AppleCreator.cs" />
     <Compile Include="Assets\Scripts\MenuButtons.cs" />
     <Compile Include="Assets\Scripts\MovementControl.cs" />
     <Compile Include="Assets\Scripts\Snake.cs" />
