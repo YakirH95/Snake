@@ -6,17 +6,13 @@ public class Snake : MonoBehaviour
 {
     Vector2Int gridMoveDirection;
     Vector2Int gridPosition;
-    float gridMoveTimer;
-    float gridMoveTimerMax;
 
     private void Start()
     {
         gridPosition = new Vector2Int(0, 0);
-        gridMoveTimerMax = 0.7f;
-        gridMoveTimer = gridMoveTimerMax;
         gridMoveDirection = new Vector2Int(0, 0);
 
-        InvokeRepeating("HandleMovementPeriods", 0, 1);
+        InvokeRepeating("HandleMovementPeriods", 0, 0.7f);
     }
 
     private void Update()
