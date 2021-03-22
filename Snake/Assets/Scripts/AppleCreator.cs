@@ -31,6 +31,14 @@ public class AppleCreator : MonoBehaviour
     public void CreateApple()
     {
         Instantiate(apple, new Vector2(randomX, randomY), Quaternion.identity);
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Snake")
+        {
+            Destroy(gameObject);
+            CreateApple();
+        }
     }
 }

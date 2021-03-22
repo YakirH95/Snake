@@ -6,12 +6,16 @@ public class Snake : MonoBehaviour
 {
     Vector2 gridMoveDirection;
     Vector2 gridPosition;
-    const float speed = 0.009f;
+    const float speed = 0.5f;
 
     private void Start()
     {
         gridPosition = new Vector2Int(0, 0);
         gridMoveDirection = new Vector2Int(0, 0);
+        QualitySettings.vSyncCount = 1;
+        Application.targetFrameRate = 60;
+
+        InvokeRepeating("MoveAfterPeriod", 0, 0.7f);
     }
 
     private void Update()
@@ -51,16 +55,11 @@ public class Snake : MonoBehaviour
             gridMoveDirection.x = -speed;
             gridMoveDirection.y = 0;
         }
-
-        gridPosition += gridMoveDirection;
-        transform.position = new Vector2(gridPosition.x, gridPosition.y);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void MoveAfterPeriod()
     {
-        if (collision.gameObject.tag == "Apple")
-        {
-
-        }
+        gridPosition += gridMoveDirection;
+        transform.position = new Vector2(gridPosition.x, gridPosition.y);
     }
 }
