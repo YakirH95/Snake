@@ -1,12 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Snake : MonoBehaviour
 {
     Vector2 gridMoveDirection;
     Vector2 gridPosition;
+    Vector2 lastBodyPossition;
     const float speed = 0.5f;
+    public GameObject bodyPart;
+
+    int bodySize;
+    List<Transform> tail = new List<Transform>();
 
     private void Start()
     {
@@ -59,15 +65,33 @@ public class Snake : MonoBehaviour
 
     void MoveAfterPeriod()
     {
+     
         gridPosition += gridMoveDirection;
         transform.position = new Vector2(gridPosition.x, gridPosition.y);
+
+        Vector2 temp = transform.position;
+
+        if (tail.Count > 0)
+        {
+            tail.Last().position = temp;
+            tail.Insert(0, tail.Last());
+            tail.RemoveAt(tail.Count - 1);
+        }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
+    private void OnTriggerEnter2D(Collider2D collision)
+   {
+
+       /* if (collision.gameObject.tag == "Apple")
+        {
+            Vector2 tempHeadPos = this.transform.position;
+            Instantiate(bodyPart, tempHeadPos, Quaternion.identity);
+        }*/
+
         if (collision.gameObject.tag == "Wall")
         {
             Destroy(gameObject);
         }
+
     }
 }
