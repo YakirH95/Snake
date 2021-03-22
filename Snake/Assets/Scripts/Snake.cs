@@ -62,4 +62,12 @@ public class Snake : MonoBehaviour
         gridPosition += gridMoveDirection;
         transform.position = new Vector2(gridPosition.x, gridPosition.y);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Wall")
+        {
+            Destroy(gameObject);
+        }
+    }
 }
