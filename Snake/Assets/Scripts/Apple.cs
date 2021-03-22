@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class Apple : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    AppleCreator appleCreatorScript;
+    public GameObject appleCreator;
+
+    private void Start()
     {
-        
+        appleCreator = GameObject.Find("Apple Creator");
+        appleCreatorScript = appleCreator.GetComponent<AppleCreator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.gameObject.tag == "Snake")
+        {
+            Destroy(gameObject);
+            appleCreatorScript.CreateApple();
+        }
     }
 }

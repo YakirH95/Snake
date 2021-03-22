@@ -32,7 +32,7 @@ public class Snake : MonoBehaviour
             gridMoveDirection.y = speed;
         }
 
-        if (Input.GetKeyDown(KeyCode.DownArrow) && (gridMoveDirection.y != 1))
+        if (Input.GetKeyDown(KeyCode.DownArrow) && (gridMoveDirection.y <= 0))
         {
             transform.rotation = Quaternion.Euler(0, 0, 180);
 
@@ -40,7 +40,7 @@ public class Snake : MonoBehaviour
             gridMoveDirection.y = -speed;
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow) && (gridMoveDirection.x != -1))
+        if (Input.GetKeyDown(KeyCode.RightArrow) && (gridMoveDirection.x >= 0))
         {
             transform.rotation = Quaternion.Euler(0, 0, 270);
 
@@ -48,7 +48,7 @@ public class Snake : MonoBehaviour
             gridMoveDirection.y = 0;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && (gridMoveDirection.x != 1))
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && (gridMoveDirection.x <= 0))
         {
             transform.rotation = Quaternion.Euler(0, 0, 90);
 
