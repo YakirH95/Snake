@@ -67,7 +67,6 @@
     <Compile Include="Assets\Scripts\Apple.cs" />
     <Compile Include="Assets\Scripts\AppleCreator.cs" />
     <Compile Include="Assets\Scripts\MenuButtons.cs" />
-    <Compile Include="Assets\Scripts\MovementControl.cs" />
     <Compile Include="Assets\Scripts\Snake.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.17f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
