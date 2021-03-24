@@ -9,10 +9,10 @@ public class Snake : MonoBehaviour
     Vector2 gridPosition;
     Vector2 lastBodyPossition;
     const float speed = 0.5f;
-    public GameObject bodyPart;
+    public GameObject tailPart;
 
-    int bodySize;
     List<Transform> tail = new List<Transform>();
+    bool snakeAte = false;
 
     private void Start()
     {
@@ -69,24 +69,32 @@ public class Snake : MonoBehaviour
         gridPosition += gridMoveDirection;
         transform.position = new Vector2(gridPosition.x, gridPosition.y);
 
-        Vector2 temp = transform.position;
+        Vector2 tempPos = transform.position;
 
-        if (tail.Count > 0)
+
+        if (snakeAte)
         {
-            tail.Last().position = temp;
+            GameObject newTail = (GameObject)Instantiate(tailPart, tempPos, Quaternion.identity);
+            tail.Insert(0, newTail.transform);
+            snakeAte = false;
+        }
+
+       /* else if (tail.Count > 0)
+        {
+            tail.Last().position = tempPos;
             tail.Insert(0, tail.Last());
             tail.RemoveAt(tail.Count - 1);
-        }
+        }*/
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
    {
 
-       /* if (collision.gameObject.tag == "Apple")
+        if (collision.gameObject.tag == "Apple")
         {
-            Vector2 tempHeadPos = this.transform.position;
-            Instantiate(bodyPart, tempHeadPos, Quaternion.identity);
-        }*/
+            snakeAte = true;
+        }
 
         if (collision.gameObject.tag == "Wall")
         {
