@@ -5,7 +5,7 @@ using System.Linq;
 
 public class Snake : MonoBehaviour
 {
-    Vector2 moveDirection = Vector2.up;
+    Vector2 moveDirection = new Vector2(0, 0.5f);
     List<Transform> tail = new List<Transform>();
 
     bool snakeAte = false;
@@ -58,32 +58,31 @@ public class Snake : MonoBehaviour
             tail.Insert(0, tail.Last());
             tail.RemoveAt(tail.Count - 1);
         }
-
     }
 
     void SnakeInput()
     {
-        if (Input.GetKey(KeyCode.RightArrow) && moveDirection != Vector2.left)
+        if (Input.GetKey(KeyCode.RightArrow) && moveDirection != new Vector2(-0.5f, 0))
         {
-            moveDirection = Vector2.right;
+            moveDirection = new Vector2(0.5f, 0);
             transform.rotation = Quaternion.Euler(0, 0, 270);
         }
 
-        else if (Input.GetKey(KeyCode.DownArrow) && moveDirection != Vector2.up)
+        else if (Input.GetKey(KeyCode.DownArrow) && moveDirection != new Vector2(0, 0.5f))
         {
-            moveDirection = Vector2.down;    
+            moveDirection = new Vector2(0, -0.5f);    
             transform.rotation = Quaternion.Euler(0, 0, 180);
         }
 
-        else if (Input.GetKey(KeyCode.LeftArrow) && moveDirection != Vector2.right)
+        else if (Input.GetKey(KeyCode.LeftArrow) && moveDirection != new Vector2(0.5f,0))
         {
-            moveDirection = Vector2.left; 
+            moveDirection = new Vector2(-0.5f, 0);
             transform.rotation = Quaternion.Euler(0, 0, 90);
         }
 
-        else if (Input.GetKey(KeyCode.UpArrow) && moveDirection != Vector2.down)
+        else if (Input.GetKey(KeyCode.UpArrow) && moveDirection != new Vector2(0, -0.5f))
         {
-            moveDirection = Vector2.up;
+            moveDirection = new Vector2(0, 0.5f);
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
