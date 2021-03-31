@@ -5,92 +5,91 @@ using System.Linq;
 
 public class Snake : MonoBehaviour
 {
-    Vector2 gridMoveDirection;
-    Vector2 gridPosition;
-    Vector2 lastBodyPossition;
-    const float speed = 0.5f;
-    public GameObject tailPart;
-
+    Vector2 moveDirection = Vector2.up;
     List<Transform> tail = new List<Transform>();
+
     bool snakeAte = false;
+    public GameObject tailPart;
 
     private void Start()
     {
-        gridPosition = new Vector2Int(0, 0);
-        gridMoveDirection = new Vector2Int(0, 0);
-        QualitySettings.vSyncCount = 1;
-        Application.targetFrameRate = 60;
-
-        InvokeRepeating("MoveAfterPeriod", 0, 0.7f);
+        InvokeRepeating("Move", 0.5f, 0.5f);
     }
 
-    private void Update()
+    void Update()
     {
-        HandleInput();
+        SnakeInput();
+        
     }
-
-    void HandleInput()
+    void Move()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) && (gridMoveDirection.y >= 0))
+        Vector2 currentPos = transform.position;
+        transform.Translate(moveDirection, Space.World);
+
+
+        if (tail.Count > 0)
         {
-            transform.rotation = Quaternion.Euler(0,0,0);
-            gridMoveDirection.x = 0;
-            gridMoveDirection.y = speed;
+            // Move last Tail Element to where the Head was
+            tail.Last().position = currentPos;
+
+            // Add to front of list, remove from the back
+            tail.Insert(0, tail.Last());
+            tail.RemoveAt(tail.Count - 1);
         }
-
-        if (Input.GetKeyDown(KeyCode.DownArrow) && (gridMoveDirection.y <= 0))
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 180);
-
-            gridMoveDirection.x = 0;
-            gridMoveDirection.y = -speed;
-        }
-
-        if (Input.GetKeyDown(KeyCode.RightArrow) && (gridMoveDirection.x >= 0))
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 270);
-
-            gridMoveDirection.x = speed;
-            gridMoveDirection.y = 0;
-        }
-
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && (gridMoveDirection.x <= 0))
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 90);
-
-            gridMoveDirection.x = -speed;
-            gridMoveDirection.y = 0;
-        }
-    }
-
-    void MoveAfterPeriod()
-    {
-     
-        gridPosition += gridMoveDirection;
-        transform.position = new Vector2(gridPosition.x, gridPosition.y);
-
-        Vector2 tempPos = transform.position;
-
 
         if (snakeAte)
         {
-            GameObject newTail = (GameObject)Instantiate(tailPart, tempPos, Quaternion.identity);
-            tail.Insert(0, newTail.transform);
+            // Load Prefab into the world
+            GameObject newTailPart = (GameObject)Instantiate(tailPart, currentPos, Quaternion.identity);
+
+            // Keep track of it in our tail list
+            tail.Insert(0, newTailPart.transform);
+
+            // Reset the flag
             snakeAte = false;
         }
-
-       /* else if (tail.Count > 0)
+        // Do we have a Tail?
+        else if (tail.Count > 0)
         {
-            tail.Last().position = tempPos;
+            // Move last Tail Element to where the Head was
+            tail.Last().position = currentPos;
+
+            // Add to front of list, remove from the back
             tail.Insert(0, tail.Last());
             tail.RemoveAt(tail.Count - 1);
-        }*/
+        }
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-   {
+    void SnakeInput()
+    {
+        if (Input.GetKey(KeyCode.RightArrow) && moveDirection != Vector2.left)
+        {
+            moveDirection = Vector2.right;
+            transform.rotation = Quaternion.Euler(0, 0, 270);
+        }
 
+        else if (Input.GetKey(KeyCode.DownArrow) && moveDirection != Vector2.up)
+        {
+            moveDirection = Vector2.down;    
+            transform.rotation = Quaternion.Euler(0, 0, 180);
+        }
+
+        else if (Input.GetKey(KeyCode.LeftArrow) && moveDirection != Vector2.right)
+        {
+            moveDirection = Vector2.left; 
+            transform.rotation = Quaternion.Euler(0, 0, 90);
+        }
+
+        else if (Input.GetKey(KeyCode.UpArrow) && moveDirection != Vector2.down)
+        {
+            moveDirection = Vector2.up;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         if (collision.gameObject.tag == "Apple")
         {
             snakeAte = true;
@@ -100,6 +99,5 @@ public class Snake : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
     }
 }
