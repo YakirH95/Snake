@@ -5,11 +5,16 @@ using System.Linq;
 
 public class Snake : MonoBehaviour
 {
-    Vector2 moveDirection = new Vector2(0, 0.5f);
+    Vector2 moveDirection = Vector2.up;
     List<Transform> tail = new List<Transform>();
 
     bool snakeAte = false;
     public GameObject tailPart;
+
+    bool turnRight;
+    bool turnLeft;
+    bool turnUp;
+    bool turnDown;
 
     private void Start()
     {
@@ -19,10 +24,35 @@ public class Snake : MonoBehaviour
     void Update()
     {
         SnakeInput();
-        
     }
+
     void Move()
     {
+       
+        if (turnRight)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 270);
+            turnRight = false;
+        }
+
+        else if (turnLeft)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 90);
+            turnLeft = false;
+        }
+
+        else if (turnUp)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            turnUp = false;
+        }
+
+        else if (turnDown)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 180);
+            turnDown = false;
+        }
+
         Vector2 currentPos = transform.position;
         transform.Translate(moveDirection, Space.World);
 
@@ -62,28 +92,28 @@ public class Snake : MonoBehaviour
 
     void SnakeInput()
     {
-        if (Input.GetKey(KeyCode.RightArrow) && moveDirection != new Vector2(-0.5f, 0))
+        if (Input.GetKey(KeyCode.RightArrow) && moveDirection != Vector2.left)
         {
-            moveDirection = new Vector2(0.5f, 0);
-            transform.rotation = Quaternion.Euler(0, 0, 270);
+            turnRight = true;
+            moveDirection = Vector2.right;
         }
 
-        else if (Input.GetKey(KeyCode.DownArrow) && moveDirection != new Vector2(0, 0.5f))
+        else if (Input.GetKey(KeyCode.DownArrow) && moveDirection != Vector2.up)
         {
-            moveDirection = new Vector2(0, -0.5f);    
-            transform.rotation = Quaternion.Euler(0, 0, 180);
+            turnDown = true;
+            moveDirection = Vector2.down;
         }
 
-        else if (Input.GetKey(KeyCode.LeftArrow) && moveDirection != new Vector2(0.5f,0))
+        else if (Input.GetKey(KeyCode.LeftArrow) && moveDirection != Vector2.right)
         {
-            moveDirection = new Vector2(-0.5f, 0);
-            transform.rotation = Quaternion.Euler(0, 0, 90);
+            turnLeft = true;
+            moveDirection = Vector2.left;
         }
 
-        else if (Input.GetKey(KeyCode.UpArrow) && moveDirection != new Vector2(0, -0.5f))
+        else if (Input.GetKey(KeyCode.UpArrow) && moveDirection != Vector2.down)
         {
-            moveDirection = new Vector2(0, 0.5f);
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            turnUp = true;
+            moveDirection = Vector2.up;
         }
     }
 
