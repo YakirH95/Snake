@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2276576834784715079}
   m_Layer: 0
   m_Name: Snake Tail
-  m_TagString: Untagged
+  m_TagString: Body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -99,5 +99,10 @@ public class Snake : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (collision.gameObject.tag == "Body")
+        {
+            Destroy(gameObject);
+        }
     }
 }
