@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Apple
   - Snake
+  - Wall
+  - Body
   layers:
   - Default
   - TransparentFX
