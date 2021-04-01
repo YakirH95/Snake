@@ -97,9 +97,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tail: []
-  snakeAte: 0
   tailPart: {fileID: 0}
   hitSomething: 0
+  appleConsumed: 0
 --- !u!50 &1668259590305725849
 Rigidbody2D:
   serializedVersion: 4
@@ -134,6 +134,6 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.004895687, y: -0.053854108}
-  m_Size: {x: 0.88368034, y: 1.0305555}
+  m_Offset: {x: 0.0048959255, y: -0.02447927}
+  m_Size: {x: 0.39409685, y: 0.6780555}
   m_Direction: 0

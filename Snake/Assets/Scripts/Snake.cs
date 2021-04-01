@@ -116,7 +116,7 @@ public class Snake : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Wall" || (collision.gameObject.tag == "Body" && tail.Count > 5))
+        if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Body" )
         {
             hitSomething = true;
         }
