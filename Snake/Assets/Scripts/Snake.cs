@@ -8,7 +8,7 @@ public class Snake : MonoBehaviour
     Vector2 moveDirection = Vector2.up;
     public List<Transform> tail = new List<Transform>();
 
-    public bool snakeAte = false;
+    bool snakeAte = false;
     public GameObject tailPart;
 
     bool turnRight;
@@ -17,6 +17,7 @@ public class Snake : MonoBehaviour
     bool turnDown;
 
     public bool hitSomething = false;
+    public bool appleConsumed = false;
 
     private void Start()
     {
@@ -123,7 +124,7 @@ public class Snake : MonoBehaviour
         if (collision.gameObject.tag == "Apple")
         {
             snakeAte = true;
-
+            appleConsumed = true;
         }
     }
 }

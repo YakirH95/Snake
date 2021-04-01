@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
         Score = 0;
         snakeScript = Snake.GetComponent<Snake>();
 
-        ScoreText.text = "Score" + Score.ToString();
+        ScoreText.text = "Score " + Score.ToString();
     }
 
     // Update is called once per frame
@@ -28,10 +28,11 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("Level 1");
         }
 
-        if (snakeScript.snakeAte)
+        if (snakeScript.appleConsumed)
         {
             Score++;
-            ScoreText.text = "Score" + Score.ToString();
+            ScoreText.text = "Score " + Score.ToString();
+            snakeScript.appleConsumed = false;
         }
     }
 }
