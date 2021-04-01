@@ -19,6 +19,8 @@ public class Snake : MonoBehaviour
     public bool hitSomething = false;
     public bool appleConsumed = false;
 
+    bool canPressButton = true;
+
     private void Start()
     {
         InvokeRepeating("Move", 0.5f, 0.5f);
@@ -62,7 +64,7 @@ public class Snake : MonoBehaviour
 
         Vector2 lastPos = transform.position;
         transform.Translate(moveDirection, Space.World);
-
+        canPressButton = true;
 
         if (snakeAte)
         {
@@ -89,26 +91,30 @@ public class Snake : MonoBehaviour
 
     void SnakeInput()
     {
-        if (Input.GetKey(KeyCode.RightArrow) && moveDirection != Vector2.left)
+        if (Input.GetKey(KeyCode.RightArrow) && moveDirection != Vector2.left && canPressButton)
         {
+            canPressButton = false;
             turnRight = true;
             moveDirection = Vector2.right;
         }
 
-        else if (Input.GetKey(KeyCode.DownArrow) && moveDirection != Vector2.up)
+        else if (Input.GetKey(KeyCode.DownArrow) && moveDirection != Vector2.up && canPressButton)
         {
+            canPressButton = false;
             turnDown = true;
             moveDirection = Vector2.down;
         }
 
-        else if (Input.GetKey(KeyCode.LeftArrow) && moveDirection != Vector2.right)
+        else if (Input.GetKey(KeyCode.LeftArrow) && moveDirection != Vector2.right && canPressButton)
         {
+            canPressButton = false;
             turnLeft = true;
             moveDirection = Vector2.left;
         }
 
-        else if (Input.GetKey(KeyCode.UpArrow) && moveDirection != Vector2.down)
+        else if (Input.GetKey(KeyCode.UpArrow) && moveDirection != Vector2.down && canPressButton)
         {
+            canPressButton = false;
             turnUp = true;
             moveDirection = Vector2.up;
         }
