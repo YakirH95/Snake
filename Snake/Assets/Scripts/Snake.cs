@@ -6,10 +6,10 @@ using System.Linq;
 public class Snake : MonoBehaviour
 {
     Vector2 moveDirection = Vector2.up;
-    public List<Transform> tail = new List<Transform>();
+    List<Transform> tail = new List<Transform>();
 
     bool snakeAte = false;
-    public GameObject tailPart;
+    GameObject tailPart;
 
     bool turnRight;
     bool turnLeft;
