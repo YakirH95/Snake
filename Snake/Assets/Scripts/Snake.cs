@@ -28,7 +28,6 @@ public class Snake : MonoBehaviour
 
     void Move()
     {
-       
         if (turnRight)
         {
             transform.rotation = Quaternion.Euler(0, 0, 270);
@@ -53,24 +52,13 @@ public class Snake : MonoBehaviour
             turnDown = false;
         }
 
-        Vector2 currentPos = transform.position;
+        Vector2 lastPos = transform.position;
         transform.Translate(moveDirection, Space.World);
-
-
-        if (tail.Count > 0)
-        {
-            // Move last Tail Element to where the Head was
-            tail.Last().position = currentPos;
-
-            // Add to front of list, remove from the back
-            tail.Insert(0, tail.Last());
-            tail.RemoveAt(tail.Count - 1);
-        }
 
         if (snakeAte)
         {
             // Load Prefab into the world
-            GameObject newTailPart = (GameObject)Instantiate(tailPart, currentPos, Quaternion.identity);
+            GameObject newTailPart = (GameObject)Instantiate(tailPart, lastPos, Quaternion.identity);
 
             // Keep track of it in our tail list
             tail.Insert(0, newTailPart.transform);
@@ -82,7 +70,7 @@ public class Snake : MonoBehaviour
         else if (tail.Count > 0)
         {
             // Move last Tail Element to where the Head was
-            tail.Last().position = currentPos;
+            tail.Last().position = lastPos;
 
             // Add to front of list, remove from the back
             tail.Insert(0, tail.Last());
