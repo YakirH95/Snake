@@ -16,8 +16,8 @@ public class AppleCreator : MonoBehaviour
 
     public void CreateApple()
     {
-        randomX = Random.Range(-6.2f, 6.2f);
-        randomY = Random.Range(-4.5f, 4.5f);
+        randomX = Random.Range(-5.3f, 5.3f);
+        randomY = Random.Range(-3.75f, 3f);
         Instantiate(apple, new Vector2(randomX, randomY), Quaternion.identity);
     }
 }

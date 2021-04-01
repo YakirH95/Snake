@@ -6,7 +6,7 @@ using System.Linq;
 public class Snake : MonoBehaviour
 {
     Vector2 moveDirection = Vector2.up;
-    List<Transform> tail = new List<Transform>();
+    public List<Transform> tail = new List<Transform>();
 
     bool snakeAte = false;
     public GameObject tailPart;
@@ -16,6 +16,9 @@ public class Snake : MonoBehaviour
     bool turnUp;
     bool turnDown;
 
+    public bool hitSomething = false;
+    public bool appleConsumed = false;
+
     private void Start()
     {
         InvokeRepeating("Move", 0.5f, 0.5f);
@@ -24,6 +27,11 @@ public class Snake : MonoBehaviour
     void Update()
     {
         SnakeInput();
+
+        if (hitSomething)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Move()
@@ -54,6 +62,7 @@ public class Snake : MonoBehaviour
 
         Vector2 lastPos = transform.position;
         transform.Translate(moveDirection, Space.World);
+
 
         if (snakeAte)
         {
@@ -107,19 +116,15 @@ public class Snake : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Body" )
+        {
+            hitSomething = true;
+        }
+
         if (collision.gameObject.tag == "Apple")
         {
             snakeAte = true;
-        }
-
-        if (collision.gameObject.tag == "Wall")
-        {
-            Destroy(gameObject);
-        }
-
-        if (collision.gameObject.tag == "Body")
-        {
-            Destroy(gameObject);
+            appleConsumed = true;
         }
     }
 }
