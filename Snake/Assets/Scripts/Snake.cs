@@ -55,6 +55,7 @@ public class Snake : MonoBehaviour
         Vector2 lastPos = transform.position;
         transform.Translate(moveDirection, Space.World);
 
+
         if (snakeAte)
         {
             // Load Prefab into the world
