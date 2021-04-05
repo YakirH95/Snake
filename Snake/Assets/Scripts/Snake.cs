@@ -9,7 +9,7 @@ public class Snake : MonoBehaviour
     List<Transform> tail = new List<Transform>();
 
     bool snakeAte = false;
-    GameObject tailPart;
+    public GameObject tailPart;
 
     bool turnRight;
     bool turnLeft;
