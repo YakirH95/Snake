@@ -5,21 +5,19 @@ using System.Linq;
 
 public class Snake : MonoBehaviour
 {
-    Vector2 moveDirection = Vector2.up;
     List<Transform> tail = new List<Transform>();
-
-    bool snakeAte = false;
     public GameObject tailPart;
 
+    Vector2 moveDirection = Vector2.up;
     bool turnRight;
     bool turnLeft;
     bool turnUp;
     bool turnDown;
+    bool canPressButton = true;
 
+    bool snakeAte = false;
     public bool hitSomething = false;
     public bool appleConsumed = false;
-
-    bool canPressButton = true;
 
     private void Start()
     {

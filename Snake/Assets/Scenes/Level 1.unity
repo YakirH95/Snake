@@ -833,6 +833,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5613743558385968897, guid: f8626edd7036899478f2a99112bd50de,
         type: 3}
+    - target: {fileID: 1333421740454018057, guid: 1b50ca6295626984da31833c7362104c,
+        type: 3}
+      propertyPath: hitSomething
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1848459154456301047, guid: 1b50ca6295626984da31833c7362104c,
         type: 3}
       propertyPath: m_RootOrder
@@ -902,6 +907,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SnakeHead
+      objectReference: {fileID: 0}
+    - target: {fileID: 7709507661067551366, guid: 1b50ca6295626984da31833c7362104c,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.67913294
+      objectReference: {fileID: 0}
+    - target: {fileID: 7709507661067551366, guid: 1b50ca6295626984da31833c7362104c,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.67913294
+      objectReference: {fileID: 0}
+    - target: {fileID: 7709507661067551366, guid: 1b50ca6295626984da31833c7362104c,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0026049614
+      objectReference: {fileID: 0}
+    - target: {fileID: 7709507661067551366, guid: 1b50ca6295626984da31833c7362104c,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0.11750007
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b50ca6295626984da31833c7362104c, type: 3}
